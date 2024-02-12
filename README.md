@@ -1,4 +1,4 @@
-# API Alerts
+# Magpie - API Alerts
 
 This is a wrapper for the API Alerts service written in JavaScript.
 
