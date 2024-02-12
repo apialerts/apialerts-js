@@ -15,7 +15,7 @@
     "alerts"
   ],
   "author": "API Alerts",
-  "license": "ISC",
+  "license": "GNU GENERAL PUBLIC LICENSE",
   "bugs": {
     "url": "https://github.com/apialerts/js/issues"
   },
