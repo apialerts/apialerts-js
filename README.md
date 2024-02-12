@@ -8,8 +8,8 @@ View the API Alerts service at [https://apialerts.com](https://apialerts.com). A
 
 You will need to download the Magpie/API Alerts app (created by API Alerts) to use the service. Once you have your API keys from there you can proceed!
 
-###### Download for IOS: [App Store](https://apps.apple.com/us/app/magpie-api-alerts/id6476410789)
-###### Download for Android: [Play Store](https://play.google.com/store/apps/details?id=com.apialerts)
+Download for IOS: [App Store](https://apps.apple.com/us/app/magpie-api-alerts/id6476410789)\
+Download for Android: [Play Store](https://play.google.com/store/apps/details?id=com.apialerts) 
 
 After getting your account setup, install the package using npm.
 
