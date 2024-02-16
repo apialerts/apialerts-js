@@ -2,7 +2,7 @@
 
 This is a wrapper for the API Alerts service written in JavaScript.
 
-View the API Alerts service at [https://apialerts.com](https://apialerts.com). API Alerts is a service that allows you to send simple alerts (push notifications) to your phone or other devices using a simple API.
+View the API Alerts service at [apialerts.com](https://apialerts.com). API Alerts is a service that allows you to send simple alerts (push notifications) to your phone or other devices using a simple API.
   
 # Installation 
 
@@ -37,7 +37,7 @@ alerts.send({ message: 'Hello World' })
 import alerts from '@apialerts/js';
 
 // Pass in the API key as a parameter (Optional)
-alerts.send({ message: 'Hello World', api_key: 'your_api' })
+alerts.send({ message: 'Hello World', api_key: 'your_api_key' })
 
 // Set the API key using the setApiKey method before sending the alert
 alerts.setApiKey('your_api_key')
