@@ -1,6 +1,6 @@
 {
   "name": "@apialerts/js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a wrapper for apialerts.com",
   "main": "index.js",
   "scripts": {
