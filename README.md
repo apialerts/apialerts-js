@@ -39,7 +39,7 @@ import alerts from '@apialerts/js';
 // Pass in the API key as a parameter (Optional)
 alerts.send({ message: 'Hello World', api_key: 'your_api_key' })
 
-// Set the API key using the setApiKey method before sending the alert
+// Or, set the API key using the setApiKey method before sending the alert
 alerts.setApiKey('your_api_key')
 alerts.send({ message: 'Hello World' })
 ``` 
