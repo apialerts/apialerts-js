@@ -7,8 +7,8 @@ class Client {
     }
     send({
         message,
-        tags,
-        link,
+        tags = null,
+        link = null,
         api_key = this.api_key
     }) { 
         if(!api_key) throw new Error('API Key is required')
