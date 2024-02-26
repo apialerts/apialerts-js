@@ -35,5 +35,5 @@ declare class Client {
  * Export the client
  */
 declare const client: Client
-export default client
+export = client
 export { Client }
