@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/apialerts/js/issues"
   },
-  "homepage": "https://github.com/apialerts/js#readme"
+  "homepage": "https://github.com/apialerts/js#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
