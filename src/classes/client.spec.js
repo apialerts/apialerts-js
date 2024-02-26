@@ -9,7 +9,7 @@ describe('ApiAlerts Client', () => {
 
     it('should send a message with a valid API key', () => {
         const client = new Client();
-        const mockResponse = { project: 'Test Project' };
+        const mockResponse = { project: 'Test Project', tags: null, link: null };
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 status: 200,
@@ -19,14 +19,38 @@ describe('ApiAlerts Client', () => {
         const message = 'Test Message';
         const api_key = 'valid_api_key';
         client.setApiKey(api_key);
-        client.send({ message });
+        client.send({ message, tags: null, link: null });
         expect(fetch).toHaveBeenCalledWith("https://api.apialerts.com/event", {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message })
+            body: JSON.stringify({ message, tags: null, link: null })
+        });
+    });
+
+    it('should send a message with a tag', () => {
+        const tags = 'Flutter is better than Kotlin';
+        const client = new Client();
+        const mockResponse = { project: 'Test Project', tags, link: null };
+        global.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve({
+                status: 200,
+                json: () => Promise.resolve(mockResponse)
+            })
+        );
+        const message = 'Test Message';
+        const api_key = 'valid_api_key';
+        client.setApiKey(api_key);
+        client.send({ message, tags, link: null });
+        expect(fetch).toHaveBeenCalledWith("https://api.apialerts.com/event", {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${api_key}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message, tags, link: null })
         });
     });
 

@@ -7,6 +7,8 @@ class Client {
     }
     send({
         message,
+        tags = null,
+        link = null,
         api_key = this.api_key
     }) { 
         if(!api_key) throw new Error('API Key is required')
@@ -17,7 +19,11 @@ class Client {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message: message })
+            body: JSON.stringify({
+                message: message,
+                tags: tags,
+                link: link
+            })
         }).then(response => {  
             switch(response.status) {
                 case 200: return response.json()
