@@ -9,7 +9,7 @@ describe('ApiAlerts Client', () => {
 
     it('should send a message with a valid API key', () => {
         const client = new Client();
-        const mockResponse = { project: 'Test Project', tags: null, link: null };
+        const mockResponse = { project: 'Test Project', tags: [], link: null };
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 status: 200,
@@ -26,12 +26,12 @@ describe('ApiAlerts Client', () => {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message, tags: null, link: null })
+            body: JSON.stringify({ message, tags: [], link: null })
         });
     });
 
     it('should send a message with a tag', () => {
-        const tags = 'Flutter is better than Kotlin';
+        const tags = ['Flutter is better than Kotlin', 'Kotlin is better than Flutter', 'Flutter is better than React Native', 'React Native is better than Flutter', 'Kotlin is better than React Native', 'React Native is better than Kotlin'];
         const client = new Client();
         const mockResponse = { project: 'Test Project', tags, link: null };
         global.fetch = jest.fn().mockImplementation(() =>

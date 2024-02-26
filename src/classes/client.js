@@ -7,8 +7,8 @@ class Client {
     }
     send({
         message,
-        tags = null,
-        link = null,
+        tags = undefined,
+        link = undefined,
         api_key = this.api_key
     }) { 
         if(!api_key) throw new Error('API Key is required')
@@ -21,8 +21,8 @@ class Client {
             },
             body: JSON.stringify({
                 message: message,
-                tags: tags,
-                link: link
+                tags: tags ?? [],
+                link: link ?? null
             })
         }).then(response => {  
             switch(response.status) {
