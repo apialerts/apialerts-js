@@ -31,7 +31,15 @@ describe('ApiAlerts Client', () => {
     });
 
     it('should send a message with a tag', () => {
-        const tags = ['Flutter is better than Kotlin', 'Kotlin is better than Flutter', 'Flutter is better than React Native', 'React Native is better than Flutter', 'Kotlin is better than React Native', 'React Native is better than Kotlin'];
+        const tags = [
+            'Flutter is better than Kotlin',
+            'Kotlin is better than Flutter',
+            'Flutter is better than React Native',
+            'React Native is better than Flutter',
+            'Kotlin is better than React Native',
+            'React Native is better than Kotlin',
+            'EVERYTHING IS BETTER THAN IONIC!'
+        ];
         const client = new Client();
         const mockResponse = { project: 'Test Project', tags, link: null };
         global.fetch = jest.fn().mockImplementation(() =>
