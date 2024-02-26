@@ -26,7 +26,7 @@ declare class Client {
     }: {
         message: string
         tags?: string[]
-        link?: string
+        link?: string | null
         api_key?: string
     }): void
 }
