@@ -14,7 +14,7 @@ Download for Android: [Play Store](https://play.google.com/store/apps/details?id
 After getting your account setup, install the package using npm.
 
 ```bash
-npm i @apialerts/js
+npm i apialerts-js
 ```
 
 We recommend you set the following environment variable. The module will use this to authenticate with the API Alerts service without you having to pass it in every time.
@@ -28,7 +28,7 @@ APIALERTS_API_KEY=your_api_key
 Send a simple message only notification to your devices
 
 ```javascript
-import alerts from '@apialerts/js';
+import alerts from 'apialerts-js';
 
 alerts.send({ message: 'Hello World' })
 ``` 
@@ -38,7 +38,7 @@ alerts.send({ message: 'Hello World' })
 Specify a different project in a single request
 
 ```javascript
-import alerts from '@apialerts/js';
+import alerts from 'apialerts-js';
 
 // Pass in the API key as a parameter (Optional)
 alerts.send({ message: 'Hello World', api_key: 'your_api_key' })

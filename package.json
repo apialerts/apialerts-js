@@ -1,14 +1,14 @@
 {
-  "name": "@apialerts/js",
-  "version": "1.1.1",
-  "description": "a wrapper for apialerts.com",
+  "name": "apialerts-js",
+  "version": "1.0.0",
+  "description": "JS wrapper for apialerts.com",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apialerts/js.git"
+    "url": "git+https://github.com/apialerts/apialerts-js.git"
   },
   "keywords": [
     "api",
@@ -17,9 +17,9 @@
   "author": "API Alerts",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/apialerts/js/issues"
+    "url": "https://github.com/apialerts/apialerts-js/issues"
   },
-  "homepage": "https://github.com/apialerts/js#readme",
+  "homepage": "https://github.com/apialerts/apialerts-js#readme",
   "devDependencies": {
     "jest": "29.7.0"
   }
