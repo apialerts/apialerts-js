@@ -18,6 +18,8 @@ class Client {
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
+                'X-Integration': 'js',
+                'X-Version': '1.0.0'
             },
             body: JSON.stringify({
                 message: message,
