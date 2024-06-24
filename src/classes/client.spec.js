@@ -1,4 +1,5 @@
 const Client = require('./client');
+const constants = require('./constants');
 
 describe('ApiAlerts Client', () => {
 
@@ -26,7 +27,7 @@ describe('ApiAlerts Client', () => {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
                 'X-Integration': 'js',
-                'X-Version': '1.0.0'
+                'X-Version': constants.version
             },
             body: JSON.stringify({ message, tags: [], link: null })
         });
@@ -60,7 +61,7 @@ describe('ApiAlerts Client', () => {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
                 'X-Integration': 'js',
-                'X-Version': '1.0.0'
+                'X-Version': constants.version
             },
             body: JSON.stringify({ message, tags, link: null })
         });
