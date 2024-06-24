@@ -15,7 +15,7 @@
     "alerts"
   ],
   "author": "API Alerts",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/apialerts/apialerts-js/issues"
   },
