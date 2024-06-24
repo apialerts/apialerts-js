@@ -1,6 +1,6 @@
 {
   "name": "apialerts-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JS wrapper for apialerts.com",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "alerts"
   ],
   "author": "API Alerts",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/apialerts/apialerts-js/issues"
   },

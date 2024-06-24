@@ -1,3 +1,5 @@
+const constants = require('./constants');
+
 class Client {
     constructor() {
         this.api_key = process.env.APIALERTS_API_KEY
@@ -18,8 +20,8 @@ class Client {
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
-                'X-Integration': 'js',
-                'X-Version': '1.0.0'
+                'X-Integration': constants.integration,
+                'X-Version': constants.version
             },
             body: JSON.stringify({
                 message: message,

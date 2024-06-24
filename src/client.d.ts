@@ -35,5 +35,6 @@ declare class Client {
  * Export the client
  */
 declare const client: Client
+// @ts-ignore
 export = client
 export { Client }
