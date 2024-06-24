@@ -19,7 +19,7 @@ class Client {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
                 'X-Integration': 'js',
-                'X-Version': '1.0.0'
+                'X-Version': '1.0.1'
             },
             body: JSON.stringify({
                 message: message,
