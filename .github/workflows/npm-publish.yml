@@ -17,13 +17,16 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm test
+      - run: node node sample/onGitHubAction.js --message="Javascript - Build for Publish Success" --tags="CI/CD,JS,Build" --link="https://github.com/apialerts/apialerts-js/actions"
+        env:
+          APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
@@ -31,3 +34,6 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+      - run: node node sample/onGitHubAction.js --message="Javascript - NPM Publish Success" --tags="CI/CD,JS,Deploy" --link="https://github.com/apialerts/apialerts-js/actions"
+        env:
+          APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
