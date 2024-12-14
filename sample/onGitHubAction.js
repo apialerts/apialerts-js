@@ -1,6 +1,6 @@
 const client = require('./testClient')
 
-// Parse named parameters: message, tags, link
+// Parse named parameters: channel, message, tags, link
 const args = process.argv.slice(2);
 const params = {};
 args.forEach(arg => {
@@ -10,9 +10,10 @@ args.forEach(arg => {
 
 // build event payload
 let event =  {
-    message: params.message || 'apialerts-js',
-    tags: params.tags?.split(',') || null,
-    link: params.link || null
+    channel: params.channel ?? null,
+    message: params.message ?? 'apialerts-js',
+    tags: params.tags?.split(',') ?? null,
+    link: params.link ?? null
 }
 
 // send to test client

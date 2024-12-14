@@ -16,6 +16,6 @@ jobs:
       - run: npm ci
       - run: npm test
       - name: Send PR Build Alert
-        run: node sample/onGitHubAction.js --message="Javascript - Pull Request Build Success" --tags="CI/CD,JS,Build" --link="https://github.com/apialerts/apialerts-js/actions"
+        run: node sample/onGitHubAction.js --channel="developer" --message="Javascript - Pull Request Build Success" --tags="CI/CD,JS,Build" --link="https://github.com/apialerts/apialerts-js/actions"
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}

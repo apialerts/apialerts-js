@@ -8,6 +8,7 @@ class Client {
         this.api_key = api_key
     }
     send({
+        channel = undefined,
         message,
         tags = undefined,
         link = undefined,
@@ -24,6 +25,7 @@ class Client {
                 'X-Version': constants.version
             },
             body: JSON.stringify({
+                channel: channel ?? null,
                 message: message,
                 tags: tags ?? [],
                 link: link ?? null
