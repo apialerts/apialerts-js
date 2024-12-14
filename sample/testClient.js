@@ -11,8 +11,20 @@ if (!apiKey) {
 const client = new Client()
 client.setApiKey(apiKey) // not required as we are using the APIALERTS_API_KEY environment variable
 
-function sendAlert(event) {
-    client.send(event)
+function sendAlert({
+   message,
+   tags = undefined,
+   link = undefined,
+   api_key = this.api_key,
+   channel = undefined,
+}) {
+    client.send({
+        message,
+        tags,
+        link,
+        api_key,
+        channel
+    })
 }
 
 module.exports = { sendAlert }

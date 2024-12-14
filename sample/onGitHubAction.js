@@ -10,10 +10,10 @@ args.forEach(arg => {
 
 // build event payload
 let event =  {
-    channel: params.channel ?? null,
+    channel: params.channel,
     message: params.message ?? 'apialerts-js',
-    tags: params.tags?.split(',') ?? null,
-    link: params.link ?? null
+    tags: params.tags?.split(','),
+    link: params.link
 }
 
 // send to test client
