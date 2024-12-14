@@ -17,7 +17,8 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm test
-      - run: node node sample/onGitHubAction.js --message="Javascript - Build for Publish Success" --tags="CI/CD,JS,Build" --link="https://github.com/apialerts/apialerts-js/actions"
+      - name: Send Build Alert
+        run: node node sample/onGitHubAction.js --message="Javascript - Build for Publish Success" --tags="CI/CD,JS,Build" --link="https://github.com/apialerts/apialerts-js/actions"
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
 
@@ -34,6 +35,7 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-      - run: node node sample/onGitHubAction.js --message="Javascript - NPM Publish Success" --tags="CI/CD,JS,Deploy" --link="https://github.com/apialerts/apialerts-js/actions"
+      - name: Send Publish Alert
+        run: node node sample/onGitHubAction.js --message="Javascript - NPM Publish Success" --tags="CI/CD,JS,Deploy" --link="https://github.com/apialerts/apialerts-js/actions"
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
