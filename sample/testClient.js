@@ -8,11 +8,10 @@ if (!apiKey) {
     throw new Error('API Key is required')
 }
 
-function sendAlert(event) {
-    const client = new Client();
-    client.setApiKey(apiKey)
+const client = new Client()
+client.setApiKey(apiKey) // not required as we are using the APIALERTS_API_KEY environment variable
 
-    // Not catching error here only in GitHub Actions so it can fail pipeline
+function sendAlert(event) {
     client.send(event)
 }
 
