@@ -38,11 +38,12 @@ Specify a different workspace in a single request
 import alerts from 'apialerts-js';
 
 // Pass in the API key as a parameter (Optional)
-alerts.send({ message: 'Hello World', api_key: 'your_api_key' })
+// Pass in the workspace channel identifier. (Optional - Uses the default channel if not set)
+alerts.send({ message: 'Hello World', api_key: 'your_api_key',  channel: 'integration' })
 
-// Or, set the API key using the setApiKey method before sending the alert
+// Or, set a new API key using the setApiKey method before sending the alert
 alerts.setApiKey('your_api_key')
-alerts.send({ message: 'Hello World' })
+alerts.send({ message: 'Hello World', channel: 'integration' })
 ``` 
 
 ### Optional Properties
@@ -51,10 +52,11 @@ You can optionally supply a list of tags and a link to your simple notification.
 
 ```javascript
 let notification = {
-  message: 'Hello World',
+  channel: 'integration',         // Optional, uses the default channel if not set
+  message: 'Hello World',         // Required
   tags: ['tag1', 'tag2'],         // Optional
   link: 'https://apialerts.com',  // Optional
-  api_key: 'your_api_key'         // Optional, uses the key from setApiKey() if not provided
+  api_key: 'your_api_key',        // Optional, uses the key from setApiKey() if not provided
 }
 alerts.send(notification)
 ```
