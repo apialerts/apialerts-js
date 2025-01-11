@@ -9,15 +9,15 @@ let eventTags = null
 let eventLink = "https://github.com/apialerts/apialerts-js/actions"
 
 if (args.includes("--build")) {
-    eventMessage = "JS - PR build success"
-    eventTags = ["CI/CD", "JS", "Build"]
+    eventMessage = "Javascript - PR build success"
+    eventTags = ["Library", "Javascript", "CI/CD", "Build"]
 } else if (args.includes("--release")) {
-    eventMessage = "JS - Build for publish success"
-    eventTags = ["CI/CD", "JS", "Build"]
+    eventMessage = "Javascript - Build for publish success"
+    eventTags = ["Library", "Javascript", "CI/CD", "Build"]
 } else if (args.includes("--publish")) {
     eventChannel = "releases"
-    eventMessage = "JS - NPM publish success"
-    eventTags = ["CI/CD", "JS", "Deploy"]
+    eventMessage = "Javascript - NPM publish success"
+    eventTags = ["Library", "Javascript", "CI/CD", "Deploy"]
 }
 
 // send to test client
