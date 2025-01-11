@@ -20,7 +20,7 @@ jobs:
       - name: Run Tests
         run: npm test
       - name: Send Build Alert
-        run: node node sample/GitHubAction.js --release
+        run: node sample/GitHubAction.js --release
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
 
@@ -43,6 +43,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
       - name: Send Publish Alert
-        run: node node sample/GitHubAction.js --publish
+        run: node sample/GitHubAction.js --publish
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
