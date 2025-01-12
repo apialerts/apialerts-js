@@ -1,4 +1,4 @@
-name: Pull Request Test
+name: Pull Request
 
 on:
   pull_request:
@@ -7,15 +7,20 @@ on:
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm test
+      - name: Install Node Dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm test
       - name: Send PR Build Alert
-        run: node sample/onGitHubAction.js --message="Javascript - Pull Request Build Success" --tags="CI/CD,JS,Build" --link="https://github.com/apialerts/apialerts-js/actions"
+        run: node sample/GitHubAction.js --build
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}

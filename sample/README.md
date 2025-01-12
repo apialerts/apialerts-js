@@ -4,5 +4,5 @@ These quick scripts are used in the GitHub action workflows to send events to Ap
 
 From terminal, run the command supplying optional message, link and tags
 ```
-APIALERTS_API_KEY=your-api-key node sample/onGitHubAction.js --message="JS - Build Success" --tags="CI/CD,JS" --link="https://github.com/apialerts/apialerts-js/actions"
+APIALERTS_API_KEY=your-api-key node sample/GitHubAction.js --build
 ```

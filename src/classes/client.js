@@ -11,7 +11,8 @@ class Client {
         message,
         tags = undefined,
         link = undefined,
-        api_key = this.api_key
+        api_key = this.api_key,
+        channel = undefined,
     }) { 
         if(!api_key) throw new Error('API Key is required')
         if(!message) throw new Error('Message is required') 
@@ -26,7 +27,8 @@ class Client {
             body: JSON.stringify({
                 message: message,
                 tags: tags ?? [],
-                link: link ?? null
+                link: link ?? null,
+                channel: channel ?? null,
             })
         }).then(response => {  
             switch(response.status) {
@@ -38,7 +40,7 @@ class Client {
                 default:  throw new Error('Unknown Error')
             }
         }).then( data => { 
-            console.log(` ✓ (apialerts.com) Alert sent to ${data.project} successfully.`) 
+            console.log(` ✓ (apialerts.com) Alert sent to ${data.workspace} (${data.channel}) successfully.`)
             return data
         }).catch(error => { 
             console.error(error)
