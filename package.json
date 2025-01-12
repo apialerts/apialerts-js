@@ -1,6 +1,6 @@
 {
   "name": "apialerts-js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "JS wrapper for apialerts.com",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,9 @@
   },
   "keywords": [
     "api",
-    "alerts"
+    "alerts",
+    "apialerts",
+    "notification"
   ],
   "author": "API Alerts",
   "license": "MIT",
