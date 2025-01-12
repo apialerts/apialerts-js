@@ -65,10 +65,11 @@ alerts.send(notification)
 
 If you have any questions or feedback, please create an issue on our GitHub repository. We are always looking to improve our service and would love to hear from you. Thanks for using API Alerts!
 
+### Release Process
 
-
-
-
-
-
-
+1. Update the version in src/classes/constants.js
+2. Update the version in `package.json`
+3. run `npm install`
+4. PR to main `branch`
+5. Create a new release on GitHub on Main
+6. GitHub Actions will publish to NPM
