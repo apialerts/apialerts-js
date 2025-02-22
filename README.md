@@ -1,10 +1,8 @@
-# apialerts-js
+# API Alerts • JS Client
 
-Javascript client for the [apialerts.com](https://apialerts.com/) platform
+[GitHub Repo](https://github.com/apialerts/apialerts-js) • [NPM](https://www.npmjs.com/package/apialerts-js)
 
-[Docs](https://apialerts.com/docs/js) • [GitHub](https://github.com/apialerts/apialerts-js) • [NPM](https://www.npmjs.com/package/apialerts-js)
-
-This is a wrapper for the API Alerts service written in JavaScript.
+This library is compatible with Node.js and popular front-end frameworks like React, Angular, and Vue.js.
   
 ### Installation 
 
@@ -60,7 +58,3 @@ let notification = {
 }
 alerts.send(notification)
 ```
-
-### Feedback & Support
-
-If you have any questions or feedback, please create an issue on our GitHub repository. We are always looking to improve our service and would love to hear from you. Thanks for using API Alerts!
