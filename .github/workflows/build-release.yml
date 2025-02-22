@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Node Dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm test
+      - name: Send PR Build Alert
+        run: node sample/GitHubAction.js --release
+        env:
+          APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
