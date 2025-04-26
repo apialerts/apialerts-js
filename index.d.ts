@@ -1,4 +1,4 @@
-import Client from './src/classes/client';
+import Client from './src/classes/client.js';
 
 declare const alerts: Client;
 
