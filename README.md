@@ -14,34 +14,32 @@ npm i apialerts-js
 
 ### Standard Usage
 
-We recommend you set the following environment variable. The module will use this to authenticate with the API Alerts service without you having to pass it in every time.
+We recommend calling alerts.setApiKey at the start of your application. The module will use this to authenticate with the API Alerts service without you having to pass it in every time.
 
 ```bash
-APIALERTS_API_KEY=your_api_key 
-```
-
-Send a simple message only notification to your devices
-
-```javascript
 import alerts from 'apialerts-js';
 
-alerts.send({ message: 'Hello World' })
-``` 
+// Set the default API key using the setApiKey method before sending alerts
+alerts.setApiKey('your_api_key')
+
+// Send a simple message only notification to your workspace
+alerts.send({ message: 'Hello World', channel: 'general' })
+```
 
 ### Advanced Usage
 
-Specify a different workspace in a single request
+Specify a different workspace for a single request
 
 ```javascript
 import alerts from 'apialerts-js';
 
 // Pass in the API key as a parameter (Optional)
 // Pass in the workspace channel identifier. (Optional - Uses the default channel if not set)
-alerts.send({ message: 'Hello World', api_key: 'your_api_key',  channel: 'integration' })
+alerts.send({ message: 'Hello World', api_key: 'your_api_key', channel: 'general' })
 
 // Or, set a new API key using the setApiKey method before sending the alert
 alerts.setApiKey('your_api_key')
-alerts.send({ message: 'Hello World', channel: 'integration' })
+alerts.send({ message: 'Hello World', channel: 'general' })
 ``` 
 
 ### Optional Properties
