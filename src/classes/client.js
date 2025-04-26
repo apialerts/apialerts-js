@@ -1,9 +1,6 @@
 const constants = require('./constants');
 
 class Client {
-    constructor() {
-        this.api_key = process.env.APIALERTS_API_KEY
-    }
     setApiKey(api_key) { 
         this.api_key = api_key
     }
