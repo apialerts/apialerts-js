@@ -1,3 +1,5 @@
-import ApiAlerts from './src/client';
+import Client from './src/classes/client';
 
-export default ApiAlerts;
+declare const alerts: Client;
+
+export default alerts;

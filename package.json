@@ -1,6 +1,6 @@
 {
   "name": "apialerts-js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "JS wrapper for apialerts.com",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/apialerts/apialerts-js.git"
   },
+  "type": "module",
+  "types": "index.d.ts",
   "keywords": [
     "api",
     "alerts",
@@ -23,6 +25,9 @@
   },
   "homepage": "https://github.com/apialerts/apialerts-js#readme",
   "devDependencies": {
-    "jest": "29.7.0"
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0"
   }
 }

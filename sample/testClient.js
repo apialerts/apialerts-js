@@ -1,4 +1,4 @@
-import alerts from '../src/client';
+import alerts from '../src/client.js';
 
 // Reference the environment variable storing the API Key
 const apiKey = process.env.APIALERTS_API_KEY;
@@ -11,7 +11,7 @@ if (!apiKey) {
 // Set the API Key
 alerts.setApiKey(apiKey)
 
-function sendAlert({
+export function sendAlert({
    message,
    tags = undefined,
    link = undefined,
@@ -26,5 +26,3 @@ function sendAlert({
         channel
     })
 }
-
-module.exports = { sendAlert }

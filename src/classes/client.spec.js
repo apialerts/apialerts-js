@@ -1,5 +1,5 @@
-const Client = require('./client');
-const constants = require('./constants');
+import Client from './client.js';
+import { integration, version } from './constants.js';
 
 describe('ApiAlerts Client', () => {
 
@@ -26,8 +26,8 @@ describe('ApiAlerts Client', () => {
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
-                'X-Integration': 'js',
-                'X-Version': constants.version
+                'X-Integration': integration,
+                'X-Version': version
             },
             body: JSON.stringify({ message, tags: [], link: null, channel: null })
         });
@@ -52,8 +52,8 @@ describe('ApiAlerts Client', () => {
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
-                'X-Integration': 'js',
-                'X-Version': constants.version
+                'X-Integration': integration,
+                'X-Version': version
             },
             body: JSON.stringify({ message, tags: [], link: null, channel: channel })
         });
@@ -78,8 +78,8 @@ describe('ApiAlerts Client', () => {
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
-                'X-Integration': 'js',
-                'X-Version': constants.version
+                'X-Integration': integration,
+                'X-Version': version
             },
             body: JSON.stringify({ message, tags, link: null, channel: null })
         });
