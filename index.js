@@ -3,7 +3,8 @@
 const client = require('./src/client')
 const Client = require('./src/classes/client')
 
-module.exports = client
-module.exports.Client = Client
-
-module.exports.default = client;
+module.exports = {
+    ...client,
+    Client,
+    default: client,
+};

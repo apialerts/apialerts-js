@@ -1,3 +1,3 @@
-import Magpie = require('./src/client')
+import ApiAlerts from './src/client';
 
-export = Magpie
+export default ApiAlerts;
