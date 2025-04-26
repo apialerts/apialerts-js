@@ -1,6 +1,6 @@
-const Client = require('../src/classes/client');
+import alerts from '../src/client';
 
-// use an environment variable to store the API Key
+// Reference the environment variable storing the API Key
 const apiKey = process.env.APIALERTS_API_KEY;
 
 if (!apiKey) {
@@ -8,8 +8,8 @@ if (!apiKey) {
     throw new Error('API Key is required')
 }
 
-const client = new Client()
-client.setApiKey(apiKey) // not required as we are using the APIALERTS_API_KEY environment variable
+// Set the API Key
+alerts.setApiKey(apiKey)
 
 function sendAlert({
    message,
@@ -18,7 +18,7 @@ function sendAlert({
    api_key = this.api_key,
    channel = undefined,
 }) {
-    client.send({
+    alerts.send({
         message,
         tags,
         link,

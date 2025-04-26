@@ -10,7 +10,7 @@ describe('ApiAlerts Client', () => {
 
     it('should send a message with a valid API key', () => {
         const client = new Client();
-        const mockResponse = { workspace: 'Test Workspace', tags: [], link: null };
+        const mockResponse = { workspace: 'Test Workspace', channel: 'General', tags: [], link: null };
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 status: 200,
@@ -35,7 +35,7 @@ describe('ApiAlerts Client', () => {
 
     it('should send a message with a channel', () => {
         const client = new Client();
-        const mockResponse = { workspace: 'Test Workspace', tags: [], link: null };
+        const mockResponse = { workspace: 'Test Workspace', channel: 'General', tags: [], link: null };
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 status: 200,
@@ -62,7 +62,7 @@ describe('ApiAlerts Client', () => {
     it('should send a message with a tag', () => {
         const tags = ['tag1', 'tag2', 'tag3'];
         const client = new Client();
-        const mockResponse = { workspace: 'Test Workspace', tags, link: null, channel: null };
+        const mockResponse = { workspace: 'Test Workspace', tags, link: null, channel: 'Default' };
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 status: 200,
