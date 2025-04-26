@@ -5,3 +5,5 @@ const Client = require('./src/classes/client')
 
 module.exports = client
 module.exports.Client = Client
+
+module.exports.default = client;
