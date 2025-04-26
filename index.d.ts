@@ -1,3 +1,5 @@
-import Magpie = require('./src/client')
+import Client from './src/classes/client.js';
 
-export = Magpie
+declare const alerts: Client;
+
+export default alerts;

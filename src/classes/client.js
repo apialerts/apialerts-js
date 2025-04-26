@@ -1,4 +1,4 @@
-const constants = require('./constants');
+import { integration, version } from './constants.js'
 
 class Client {
     setApiKey(api_key) { 
@@ -18,8 +18,8 @@ class Client {
             headers: {
                 'Authorization': `Bearer ${api_key}`,
                 'Content-Type': 'application/json',
-                'X-Integration': constants.integration,
-                'X-Version': constants.version
+                'X-Integration': integration,
+                'X-Version': version
             },
             body: JSON.stringify({
                 message: message,
@@ -45,4 +45,4 @@ class Client {
     }    
 }
 
-module.exports = Client;
+export default Client;

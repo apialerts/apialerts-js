@@ -1,5 +1,5 @@
 'use strict';
 
-const Client = require('./classes/client')
+import Client from './classes/client.js';
 
-module.exports = new Client()
+export default new Client();

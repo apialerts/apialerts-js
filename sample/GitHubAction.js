@@ -1,4 +1,4 @@
-const client = require('./testClient')
+import { sendAlert } from './testClient.js'
 
 // Parse named parameters: --build, --release, or --publish
 const args = process.argv.slice(2)
@@ -21,7 +21,7 @@ if (args.includes("--build")) {
 }
 
 // send to test client
-client.sendAlert({
+sendAlert({
     channel: eventChannel,
     message: eventMessage,
     tags: eventTags,
