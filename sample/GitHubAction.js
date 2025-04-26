@@ -1,4 +1,4 @@
-import client from './testClient'
+const client = require('./testClient')
 
 // Parse named parameters: --build, --release, or --publish
 const args = process.argv.slice(2)

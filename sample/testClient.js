@@ -1,4 +1,4 @@
-import alerts from '../src/client';
+const alerts = require('../src/client');
 
 // Reference the environment variable storing the API Key
 const apiKey = process.env.APIALERTS_API_KEY;
