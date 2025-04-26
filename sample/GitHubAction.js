@@ -1,4 +1,4 @@
-import { sendAlert } from './testClient'
+import { sendAlert } from './testClient.js'
 
 // Parse named parameters: --build, --release, or --publish
 const args = process.argv.slice(2)
