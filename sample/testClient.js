@@ -15,14 +15,12 @@ export function sendAlert({
    message,
    tags = undefined,
    link = undefined,
-   apiKey = this.apiKey,
    channel = undefined,
 }) {
     alerts.send({
         message: message,
         tags: tags,
         link: link,
-        api_key: apiKey,
         channel: channel
     })
 }
