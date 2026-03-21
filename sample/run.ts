@@ -13,7 +13,7 @@ if (!apiKey) {
 ApiAlerts.configure(apiKey)
 
 // Minimal — message only
-const r1 = await ApiAlerts.sendAsync({ message: 'JS SDK - minimal' })
+const r1 = await ApiAlerts.sendAsync({ message: 'JS SDK - minimal', channel: 'testing' })
 if (!r1.success) {
     console.error(`x (apialerts.com) Error: ${r1.error}`)
     process.exit(1)
@@ -27,7 +27,7 @@ if (!r1.success) {
 // Full — all fields
 const r2 = await ApiAlerts.sendAsync({
     message: 'JS SDK - full',
-    channel: 'developer',
+    channel: 'testing',
     event: 'sdk.test',
     title: 'Integration Test',
     tags: ['CI/CD', 'JS'],
