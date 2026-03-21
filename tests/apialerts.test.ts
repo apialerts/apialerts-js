@@ -1,10 +1,56 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ApiAlerts } from '../src/index.js'
-import { mockFetch, successBody, capturedHeaders } from './helpers.js'
+import { mockFetch, mockFetchError, successBody, capturedHeaders } from './helpers.js'
 
 afterEach(() => {
     vi.unstubAllGlobals()
     ApiAlerts._reset()
+})
+
+// ── Validation ────────────────────────────────────────────────────────────────
+
+describe('validation', () => {
+    it('returns failure for empty api key', async () => {
+        ApiAlerts.configure('')
+        const result = await ApiAlerts.sendAsync({ message: 'test' })
+        expect(result.success).toBe(false)
+        expect(result.error).toContain('api key is missing')
+    })
+
+    it('returns failure for whitespace api key', async () => {
+        ApiAlerts.configure('   ')
+        const result = await ApiAlerts.sendAsync({ message: 'test' })
+        expect(result.success).toBe(false)
+        expect(result.error).toContain('api key is missing')
+    })
+
+    it('returns failure for empty message', async () => {
+        ApiAlerts.configure('key')
+        const result = await ApiAlerts.sendAsync({ message: '' })
+        expect(result.success).toBe(false)
+        expect(result.error).toContain('message is required')
+    })
+})
+
+// ── Fire-and-forget ───────────────────────────────────────────────────────────
+
+describe('fire-and-forget send()', () => {
+    it('does not throw on HTTP error', () => {
+        mockFetch(401, {})
+        ApiAlerts.configure('key')
+        expect(() => ApiAlerts.send({ message: 'test' })).not.toThrow()
+    })
+
+    it('does not throw on empty message', () => {
+        ApiAlerts.configure('key')
+        expect(() => ApiAlerts.send({ message: '' })).not.toThrow()
+    })
+
+    it('does not throw on network error', () => {
+        mockFetchError(new Error('Network failure'))
+        ApiAlerts.configure('key')
+        expect(() => ApiAlerts.send({ message: 'test' })).not.toThrow()
+    })
 })
 
 // ── Singleton ─────────────────────────────────────────────────────────────────

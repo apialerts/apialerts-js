@@ -1,4 +1,5 @@
 import { ApiAlertsClient } from './client.js'
+import { BASE_URL } from './constants.js'
 import type { Event } from './event.js'
 import type { SendResult } from './result.js'
 
@@ -10,7 +11,7 @@ export class ApiAlerts {
         _client = new ApiAlertsClient(apiKey)
     }
 
-    static setOverrides(integration: string, version: string, baseUrl: string): void {
+    static setOverrides(integration: string, version: string, baseUrl: string = BASE_URL): void {
         _client?.setOverrides(integration, version, baseUrl)
     }
 
