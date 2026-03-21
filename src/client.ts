@@ -1,5 +1,6 @@
 import type { Event } from './event.js'
-import { BASE_URL, INTEGRATION, VERSION, post } from './network.js'
+import { BASE_URL, INTEGRATION, VERSION } from './constants.js'
+import { post } from './network.js'
 import type { SendResult } from './result.js'
 
 export class ApiAlertsClient {
