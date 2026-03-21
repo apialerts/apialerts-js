@@ -16,6 +16,7 @@ ApiAlerts.configure(apiKey)
 const r1 = await ApiAlerts.sendAsync({ message: 'JS SDK - minimal' })
 if (!r1.success) {
     console.error(`x (apialerts.com) Error: ${r1.error}`)
+    process.exit(1)
 } else {
     console.log(`✓ (apialerts.com) Alert sent to ${r1.workspace} (${r1.channel})`)
     for (const w of r1.warnings) {
@@ -35,6 +36,7 @@ const r2 = await ApiAlerts.sendAsync({
 })
 if (!r2.success) {
     console.error(`x (apialerts.com) Error: ${r2.error}`)
+    process.exit(1)
 } else {
     console.log(`✓ (apialerts.com) Alert sent to ${r2.workspace} (${r2.channel})`)
     for (const w of r2.warnings) {
