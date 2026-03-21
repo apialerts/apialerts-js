@@ -2,7 +2,7 @@
  * Integration test sample — requires APIALERTS_API_KEY env var.
  * Run with: npx tsx sample/run.ts [--build | --release | --publish | --integration-tests [--channel <name>]]
  */
-import { ApiAlerts } from '../src/index.js'
+import { ApiAlerts } from '../dist/index.js'
 
 const apiKey = process.env.APIALERTS_API_KEY ?? ''
 if (!apiKey) {
