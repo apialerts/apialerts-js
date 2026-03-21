@@ -21,6 +21,6 @@ jobs:
       - name: Run Tests
         run: npm test
       - name: Send PR Build Alert
-        run: node sample/GitHubAction.js --release
+        run: npx tsx sample/run.ts --release
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
