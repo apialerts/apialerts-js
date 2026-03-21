@@ -2,7 +2,7 @@ import type { Event } from './event.js'
 import type { SendResult } from './result.js'
 
 export const INTEGRATION = 'js'
-export const VERSION = '1.3.0'
+export const VERSION = '1.3.1'
 export const BASE_URL = 'https://api.apialerts.com/event'
 
 export async function post(
