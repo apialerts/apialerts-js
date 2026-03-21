@@ -15,9 +15,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
       - name: Install Node Dependencies
         run: npm ci
+      - name: Build
+        run: npm run build
       - name: Run Tests
         run: npm test
       - name: Send PR Build Alert
