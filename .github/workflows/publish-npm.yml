@@ -17,6 +17,8 @@ jobs:
           node-version: 24
       - name: Install Node Dependencies
         run: npm ci
+      - name: Build
+        run: npm run build
       - name: Run Tests
         run: npm test
       - name: Send Build Alert
