@@ -1,9 +1,9 @@
 # API Alerts • JS/TS Client
 
-[![npm](https://img.shields.io/npm/v/apialerts-js)](https://www.npmjs.com/package/apialerts-js)
+[![npm](https://img.shields.io/npm/v/apialerts)](https://www.npmjs.com/package/apialerts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[npm](https://www.npmjs.com/package/apialerts-js) • [GitHub](https://github.com/apialerts/apialerts-js) • [API Alerts](https://apialerts.com)
+[npm](https://www.npmjs.com/package/apialerts) • [GitHub](https://github.com/apialerts/apialerts-js) • [API Alerts](https://apialerts.com)
 
 Effortless project notifications. Send once, deliver everywhere.
 
@@ -12,13 +12,13 @@ Compatible with Node.js, Deno, Bun, and browser environments. Full TypeScript su
 ## Installation
 
 ```bash
-npm install apialerts-js
+npm install apialerts
 ```
 
 ## Quick Start
 
 ```typescript
-import { ApiAlerts } from 'apialerts-js'
+import { ApiAlerts } from 'apialerts'
 
 ApiAlerts.configure('your-api-key')
 ApiAlerts.send({ message: 'Deploy complete' })
@@ -31,7 +31,7 @@ ApiAlerts.send({ message: 'Deploy complete' })
 Call `configure` once at startup, then use `send` / `sendAsync` anywhere.
 
 ```typescript
-import { ApiAlerts } from 'apialerts-js'
+import { ApiAlerts } from 'apialerts'
 
 ApiAlerts.configure('your-api-key')
 
@@ -52,7 +52,7 @@ if (!result.success) {
 Only `message` is required. All other fields are optional.
 
 ```typescript
-import { ApiAlerts, type Event } from 'apialerts-js'
+import { ApiAlerts, type Event } from 'apialerts'
 
 const event: Event = {
   message: 'Deploy complete',
@@ -61,7 +61,7 @@ const event: Event = {
   title:   'Deployed',
   tags:    ['CI/CD', 'JS'],
   link:    'https://github.com/apialerts/apialerts-js/actions',
-  data:    { version: '2.0.0' },
+  data:    { version: '1.3.0' },
 }
 
 const result = await ApiAlerts.sendAsync(event)
@@ -86,7 +86,7 @@ Use `ApiAlertsClient` directly when you need multiple clients or full
 lifecycle control.
 
 ```typescript
-import { ApiAlertsClient } from 'apialerts-js'
+import { ApiAlertsClient } from 'apialerts'
 
 const client = new ApiAlertsClient('your-api-key')
 const result = await client.sendAsync({ message: 'Deploy complete' })
