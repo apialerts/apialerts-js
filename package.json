@@ -38,6 +38,7 @@
   "homepage": "https://github.com/apialerts/apialerts-js#readme",
   "devDependencies": {
     "tsup": "^8.0.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.4.0",
     "vitest": "^4.1.0"
   }

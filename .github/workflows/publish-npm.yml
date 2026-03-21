@@ -9,44 +9,53 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
-      - name: Install Node Dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Run Tests
-        run: npm test
-      - name: Send Build Alert
-        run: npx tsx sample/run.ts --release
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx tsx sample/run.ts --release
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
 
-  publish-npm:
-    name: Publish
+  publish-alpha:
+    name: Publish Alpha
     needs: build
+    if: github.event.release.prerelease == true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
-      - name: Install Node Dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Publish to NPM
-        run: npm publish
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --tag alpha
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-      - name: Send Publish Alert
-        run: npx tsx sample/run.ts --publish
+      - run: npx tsx sample/run.ts --publish
+        env:
+          APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
+
+  publish-release:
+    name: Publish Release
+    needs: build
+    if: github.event.release.prerelease == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+      - run: npx tsx sample/run.ts --publish
         env:
           APIALERTS_API_KEY: ${{ secrets.APIALERTS_API_KEY }}
