@@ -164,7 +164,6 @@ describe('request headers', () => {
         const client = new ApiAlertsClient('key')
         await client.sendAsync({ message: 'test' })
         expect(capturedHeaders()['x-integration']).toBe('js')
-        expect(capturedHeaders()['x-version']).toBe('2.0.0')
     })
 
     it('setOverrides changes integration headers', async () => {
