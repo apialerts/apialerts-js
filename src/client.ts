@@ -18,7 +18,7 @@ export class ApiAlertsClient {
         this.debug = false
     }
 
-    setOverrides(integration: string, version: string, baseUrl: string = BASE_URL): void {
+    setOverrides(integration: string, version: string, baseUrl: string): void {
         this.integration = integration
         this.version = version
         this.baseUrl = baseUrl
