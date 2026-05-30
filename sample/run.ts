@@ -1,5 +1,5 @@
 /**
- * Integration test sample — requires APIALERTS_API_KEY env var.
+ * Integration test sample - requires APIALERTS_API_KEY env var.
  * Run with: npx tsx sample/run.ts [--build | --release | --publish | --integration-tests [--channel <name>]]
  */
 import { ApiAlerts } from '../dist/index.js'
@@ -25,7 +25,7 @@ ApiAlerts.configure(apiKey)
 if (isBuild) {
     const result = await ApiAlerts.sendAsync({
         channel: 'developer',
-        event: 'ci.build',
+        event: 'ci.build.success',
         title: 'Build Passed',
         message: 'JS SDK - PR build success',
         tags: ['CI/CD', 'JS', 'Build'],
@@ -40,7 +40,7 @@ if (isBuild) {
 } else if (isRelease) {
     const result = await ApiAlerts.sendAsync({
         channel: 'developer',
-        event: 'ci.release',
+        event: 'ci.release.success',
         title: 'Release Build Passed',
         message: 'JS SDK - Build for publish success',
         tags: ['CI/CD', 'JS', 'Build'],
@@ -55,7 +55,7 @@ if (isBuild) {
 } else if (isPublish) {
     const result = await ApiAlerts.sendAsync({
         channel: 'releases',
-        event: 'ci.publish',
+        event: 'ci.publish.success',
         title: 'Published',
         message: 'JS SDK - npm publish success',
         tags: ['CI/CD', 'JS', 'Deploy'],
@@ -78,7 +78,7 @@ if (isBuild) {
     const r2 = await ApiAlerts.sendAsync({
         message: 'JS SDK - full',
         channel,
-        event: 'sdk.test',
+        event: 'sdk.integration.test',
         title: 'Integration Test',
         tags: ['CI/CD', 'JS'],
         link,

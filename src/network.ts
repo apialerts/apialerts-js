@@ -1,6 +1,6 @@
 import type { Event } from './event.js'
 import type { SendResult } from './result.js'
-import { INTEGRATION, VERSION, BASE_URL } from './constants.js'
+import { INTEGRATION, VERSION, BASE_URL, TIMEOUT_MS } from './constants.js'
 
 export async function post(
     apiKey: string,
@@ -17,6 +17,9 @@ export async function post(
     if (event.link !== undefined) body.link = event.link
     if (event.data !== undefined) body.data = event.data
 
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS)
+
     let response: Response
     try {
         response = await fetch(baseUrl, {
@@ -28,10 +31,13 @@ export async function post(
                 'X-Version': version,
             },
             body: JSON.stringify(body),
+            signal: controller.signal,
         })
     } catch (err: unknown) {
         const message = err instanceof Error ? err.message : String(err)
         return { success: false, warnings: [], error: message }
+    } finally {
+        clearTimeout(timer)
     }
 
     if (response.status !== 200) {
@@ -65,7 +71,7 @@ export async function post(
 
 function statusError(status: number): string {
     if (status === 400) return 'bad request'
-    if (status === 401) return 'unauthorized — check your API key'
+    if (status === 401) return 'unauthorized, check your API key'
     if (status === 403) return 'forbidden'
     if (status === 429) return 'rate limit exceeded'
     return `unexpected status: ${status}`

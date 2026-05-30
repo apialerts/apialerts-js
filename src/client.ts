@@ -10,12 +10,12 @@ export class ApiAlertsClient {
     private baseUrl: string
     private debug: boolean
 
-    constructor(apiKey: string) {
+    constructor(apiKey: string, debug: boolean = false) {
         this.apiKey = apiKey
         this.integration = INTEGRATION
         this.version = VERSION
         this.baseUrl = BASE_URL
-        this.debug = false
+        this.debug = debug
     }
 
     setOverrides(integration: string, version: string, baseUrl: string): void {
@@ -28,8 +28,9 @@ export class ApiAlertsClient {
         this.debug = debug
     }
 
-    send(event: Event): void {
-        if (!this.apiKey || !this.apiKey.trim()) {
+    send(event: Event, apiKey?: string): void {
+        const key = apiKey?.trim() ? apiKey : this.apiKey
+        if (!key || !key.trim()) {
             console.error('x (apialerts.com) Error: api key is missing')
             return
         }
@@ -39,7 +40,7 @@ export class ApiAlertsClient {
         }
         void (async () => {
             try {
-                const result = await post(this.apiKey, event, this.integration, this.version, this.baseUrl)
+                const result = await post(key, event, this.integration, this.version, this.baseUrl)
                 if (!this.debug) return
                 if (!result.success) {
                     console.error(`x (apialerts.com) Error: ${result.error}`)
@@ -50,35 +51,21 @@ export class ApiAlertsClient {
                     }
                 }
             } catch {
-                // fire-and-forget — unexpected errors are swallowed
+                // fire-and-forget - unexpected errors are swallowed
             }
         })()
     }
 
-    async sendAsync(event: Event): Promise<SendResult> {
-        if (!this.apiKey || !this.apiKey.trim()) {
+    async sendAsync(event: Event, apiKey?: string): Promise<SendResult> {
+        const key = apiKey?.trim() ? apiKey : this.apiKey
+        if (!key || !key.trim()) {
             return { success: false, warnings: [], error: 'api key is missing' }
         }
         if (!event.message || !event.message.trim()) {
             return { success: false, warnings: [], error: 'message is required' }
         }
         try {
-            return await post(this.apiKey, event, this.integration, this.version, this.baseUrl)
-        } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : String(err)
-            return { success: false, warnings: [], error: message }
-        }
-    }
-
-    async sendWithKeyAsync(apiKey: string, event: Event): Promise<SendResult> {
-        if (!apiKey || !apiKey.trim()) {
-            return { success: false, warnings: [], error: 'api key is missing' }
-        }
-        if (!event.message || !event.message.trim()) {
-            return { success: false, warnings: [], error: 'message is required' }
-        }
-        try {
-            return await post(apiKey, event, this.integration, this.version, this.baseUrl)
+            return await post(key, event, this.integration, this.version, this.baseUrl)
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : String(err)
             return { success: false, warnings: [], error: message }

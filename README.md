@@ -26,7 +26,7 @@ ApiAlerts.send({ message: 'Deploy complete' })
 
 ## Usage
 
-### Global singleton (recommended)
+### Global singleton
 
 Call `configure` once at startup, then use `send` / `sendAsync` anywhere.
 
@@ -35,10 +35,11 @@ import { ApiAlerts } from 'apialerts'
 
 ApiAlerts.configure('your-api-key')
 
-// Fire-and-forget — never throws
+// Fire-and-forget. Never throws, silently drops errors.
+// Pass `debug: true` to `configure` to log them.
 ApiAlerts.send({ message: 'Deploy complete' })
 
-// Or get the result back — never throws
+// Or get the result back. Never throws, check `result.success`.
 const result = await ApiAlerts.sendAsync({ message: 'Deploy complete' })
 if (!result.success) {
   console.error(result.error)
@@ -47,9 +48,17 @@ if (!result.success) {
 }
 ```
 
+### Enable debug logging
+
+```typescript
+ApiAlerts.configure('your-api-key', true) // logs successes, warnings, and errors
+```
+
+When debug is enabled, the SDK logs `✓` for successful sends, `!` for warnings, and `x` for errors. Critical errors (missing API key, not yet configured) always log regardless.
+
 ### Event fields
 
-Only `message` is required. All other fields are optional.
+Only `message` is required. All other fields are optional and omitted from the request body when not set.
 
 ```typescript
 import { ApiAlerts, type Event } from 'apialerts'
@@ -57,52 +66,56 @@ import { ApiAlerts, type Event } from 'apialerts'
 const event: Event = {
   message: 'Deploy complete',
   channel: 'releases',
-  event:   'ci.deploy',
+  event:   'ci.deploy.success',
   title:   'Deployed',
   tags:    ['CI/CD', 'JS'],
   link:    'https://github.com/apialerts/apialerts-js/actions',
-  data:    { version: '1.3.0' },
+  data:    { version: '1.3.1' },
 }
 
 const result = await ApiAlerts.sendAsync(event)
-if (!result.success) {
-  console.error(result.error)
-}
 ```
 
-| Field     | Type                        | Required | Description                      |
-|-----------|-----------------------------|----------|----------------------------------|
-| `message` | `string`                    | Yes      | Main notification message        |
-| `channel` | `string`                    | No       | Target channel name              |
-| `event`   | `string`                    | No       | Event key (e.g. `ci.deploy`)     |
-| `title`   | `string`                    | No       | Short title                      |
-| `tags`    | `string[]`                  | No       | Categorisation tags              |
-| `link`    | `string`                    | No       | URL attached to the notification |
-| `data`    | `Record<string, unknown>`   | No       | Arbitrary key-value metadata     |
-
-### Instance-based client
-
-Use `ApiAlertsClient` directly when you need multiple clients or full
-lifecycle control.
-
-```typescript
-import { ApiAlertsClient } from 'apialerts'
-
-const client = new ApiAlertsClient('your-api-key')
-const result = await client.sendAsync({ message: 'Deploy complete' })
-if (!result.success) {
-  console.error(result.error)
-} else {
-  console.log(`Sent to ${result.workspace} (${result.channel})`)
-}
-```
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `message` | `string` | Yes | Human-readable notification text. This is what appears on the push notification lock screen. |
+| `channel` | `string` | No | Workspace channel the push notification fires on. Defaults to the workspace default channel when omitted. |
+| `event` | `string` | No | Identifies what kind of thing happened. Optional but recommended. Use dotted notation (e.g. `ci.deploy.success`, `payment.failed`, `user.signup`) so routing rules can match glob patterns like `ci.*` or `*.failed`. |
+| `title` | `string` | No | Short headline some destinations render separately from the message body. |
+| `tags` | `string[]` | No | Categorisation tags for filtering and search. |
+| `link` | `string` | No | URL attached to the notification. Tapping the push notification opens this link. |
+| `data` | `Record<string, unknown>` | No | Arbitrary key-value metadata. Available to non-push destinations for templating (Slack message bodies, email templates, webhook payloads). |
 
 ### Send to multiple workspaces
 
+Pass an `apiKey` as the optional second argument to override the configured key for one call.
+
 ```typescript
-const result = await ApiAlerts.sendWithKeyAsync('other-api-key', { message: 'Deploy complete' })
-if (!result.success) {
-  console.error(result.error)
+ApiAlerts.send({ message: 'Deploy complete' }, 'other-workspace-api-key')
+
+const result = await ApiAlerts.sendAsync(
+  { message: 'Deploy complete' },
+  'other-workspace-api-key',
+)
+```
+
+## API
+
+| Method | Description |
+|---|---|
+| `ApiAlerts.configure(apiKey, debug?)` | Initialise the singleton. First call wins; subsequent calls are no-ops. |
+| `ApiAlerts.send(event, apiKey?)` | Fire-and-forget. Never throws, drops errors silently unless `debug` is on. |
+| `ApiAlerts.sendAsync(event, apiKey?)` | Returns a `SendResult`. Never throws; check `result.success`. |
+
+`SendResult` shape:
+
+```typescript
+interface SendResult {
+  success: boolean
+  workspace?: string  // populated on success
+  channel?: string    // populated on success
+  warnings: string[]  // non-fatal server warnings (e.g. deprecated field)
+  error?: string      // populated on failure
 }
 ```
 
