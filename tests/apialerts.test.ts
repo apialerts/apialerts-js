@@ -74,7 +74,7 @@ describe('ApiAlerts singleton', () => {
         expect(result.workspace).toBe('W')
     })
 
-    it('configure() is idempotent — second call ignored', async () => {
+    it('configure() is idempotent - second call ignored', async () => {
         mockFetch(200, successBody())
         ApiAlerts.configure('first-key')
         ApiAlerts.configure('second-key')
@@ -82,16 +82,16 @@ describe('ApiAlerts singleton', () => {
         expect(capturedHeaders()['authorization']).toBe('Bearer first-key')
     })
 
-    it('sendWithKeyAsync returns failure before configure()', async () => {
-        const result = await ApiAlerts.sendWithKeyAsync('key', { message: 'test' })
+    it('sendAsync with key override returns failure before configure()', async () => {
+        const result = await ApiAlerts.sendAsync({ message: 'test' }, 'key')
         expect(result.success).toBe(false)
         expect(result.error).toContain('client not configured')
     })
 
-    it('sendWithKeyAsync uses override key after configure()', async () => {
+    it('sendAsync uses override api key', async () => {
         mockFetch(200, successBody('W', 'C'))
         ApiAlerts.configure('original-key')
-        const result = await ApiAlerts.sendWithKeyAsync('override-key', { message: 'test' })
+        const result = await ApiAlerts.sendAsync({ message: 'test' }, 'override-key')
         expect(result.success).toBe(true)
         expect(capturedHeaders()['authorization']).toBe('Bearer override-key')
     })

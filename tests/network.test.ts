@@ -114,10 +114,32 @@ describe('request headers', () => {
         expect(capturedHeaders()['x-version']).toBe('1.0.0')
     })
 
-    it('sendWithKeyAsync uses override key', async () => {
+    it('sendAsync uses optional override key', async () => {
         ApiAlerts.configure('original-key')
-        await ApiAlerts.sendWithKeyAsync('override-key', { message: 'test' })
+        await ApiAlerts.sendAsync({ message: 'test' }, 'override-key')
         expect(capturedHeaders()['authorization']).toBe('Bearer override-key')
+    })
+})
+
+// ── Timeout / abort signal ────────────────────────────────────────────────────
+
+describe('timeout', () => {
+    it('passes an AbortSignal to fetch (timeout machinery)', async () => {
+        mockFetch(200, successBody())
+        ApiAlerts.configure('key')
+        await ApiAlerts.sendAsync({ message: 'test' })
+        const opts = (fetch as ReturnType<typeof vi.fn>).mock.calls[0][1] as RequestInit
+        expect(opts.signal).toBeInstanceOf(AbortSignal)
+    })
+
+    it('surfaces AbortError from fetch as SendResult failure', async () => {
+        vi.stubGlobal('fetch', vi.fn().mockRejectedValue(
+            new DOMException('The operation was aborted', 'AbortError')
+        ))
+        ApiAlerts.configure('key')
+        const result = await ApiAlerts.sendAsync({ message: 'test' })
+        expect(result.success).toBe(false)
+        expect(result.error).toContain('aborted')
     })
 })
 
