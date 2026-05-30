@@ -70,7 +70,7 @@ const event: Event = {
   title:   'Deployed',
   tags:    ['CI/CD', 'JS'],
   link:    'https://github.com/apialerts/apialerts-js/actions',
-  data:    { version: '1.3.1' },
+  data:    { version: '1.3.2' },
 }
 
 const result = await ApiAlerts.sendAsync(event)
