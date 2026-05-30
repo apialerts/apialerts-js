@@ -1,58 +1,113 @@
-# API Alerts • JS Client
+# API Alerts • JS/TS Client
 
-[GitHub Repo](https://github.com/apialerts/apialerts-js) • [NPM](https://www.npmjs.com/package/apialerts-js)
+[![npm](https://img.shields.io/npm/v/apialerts)](https://www.npmjs.com/package/apialerts)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This library is compatible with Node.js and popular front-end frameworks like React, Angular, and Vue.js.
-  
-### Installation 
+[npm](https://www.npmjs.com/package/apialerts) • [GitHub](https://github.com/apialerts/apialerts-js) • [API Alerts](https://apialerts.com)
 
-Install the package using NPM
+Effortless project notifications. Send once, deliver everywhere.
 
-```bash
-npm i apialerts-js
-```
+Compatible with Node.js, Deno, Bun, and browser environments. Full TypeScript support.
 
-### Standard Usage
-
-We recommend calling alerts.setApiKey at the start of your application. The module will use this to authenticate with the API Alerts service without you having to pass it in every time.
+## Installation
 
 ```bash
-import alerts from 'apialerts-js';
-
-// Set the default API key using the setApiKey method before sending alerts
-alerts.setApiKey('your_api_key')
-
-// Send a simple message only notification to your workspace
-alerts.send({ message: 'Hello World', channel: 'general' })
+npm install apialerts
 ```
 
-### Advanced Usage
+## Quick Start
 
-Specify a different workspace for a single request
+```typescript
+import { ApiAlerts } from 'apialerts'
 
-```javascript
-import alerts from 'apialerts-js';
+ApiAlerts.configure('your-api-key')
+ApiAlerts.send({ message: 'Deploy complete' })
+```
 
-// Pass in the API key as a parameter (Optional)
-// Pass in the workspace channel identifier. (Optional - Uses the default channel if not set)
-alerts.send({ message: 'Hello World', api_key: 'your_api_key', channel: 'general' })
+## Usage
 
-// Or, set a new API key using the setApiKey method before sending the alert
-alerts.setApiKey('your_api_key')
-alerts.send({ message: 'Hello World', channel: 'general' })
-``` 
+### Global singleton (recommended)
 
-### Optional Properties
+Call `configure` once at startup, then use `send` / `sendAsync` anywhere.
 
-You can optionally supply a list of tags and a link to your simple notification.
+```typescript
+import { ApiAlerts } from 'apialerts'
 
-```javascript
-let notification = {
-  channel: 'integration',         // Optional, uses the default channel if not set
-  message: 'Hello World',         // Required
-  tags: ['tag1', 'tag2'],         // Optional
-  link: 'https://apialerts.com',  // Optional
-  api_key: 'your_api_key',        // Optional, uses the key from setApiKey() if not provided
+ApiAlerts.configure('your-api-key')
+
+// Fire-and-forget — never throws
+ApiAlerts.send({ message: 'Deploy complete' })
+
+// Or get the result back — never throws
+const result = await ApiAlerts.sendAsync({ message: 'Deploy complete' })
+if (!result.success) {
+  console.error(result.error)
+} else {
+  console.log(`Sent to ${result.workspace} (${result.channel})`)
 }
-alerts.send(notification)
 ```
+
+### Event fields
+
+Only `message` is required. All other fields are optional.
+
+```typescript
+import { ApiAlerts, type Event } from 'apialerts'
+
+const event: Event = {
+  message: 'Deploy complete',
+  channel: 'releases',
+  event:   'ci.deploy',
+  title:   'Deployed',
+  tags:    ['CI/CD', 'JS'],
+  link:    'https://github.com/apialerts/apialerts-js/actions',
+  data:    { version: '1.3.0' },
+}
+
+const result = await ApiAlerts.sendAsync(event)
+if (!result.success) {
+  console.error(result.error)
+}
+```
+
+| Field     | Type                        | Required | Description                      |
+|-----------|-----------------------------|----------|----------------------------------|
+| `message` | `string`                    | Yes      | Main notification message        |
+| `channel` | `string`                    | No       | Target channel name              |
+| `event`   | `string`                    | No       | Event key (e.g. `ci.deploy`)     |
+| `title`   | `string`                    | No       | Short title                      |
+| `tags`    | `string[]`                  | No       | Categorisation tags              |
+| `link`    | `string`                    | No       | URL attached to the notification |
+| `data`    | `Record<string, unknown>`   | No       | Arbitrary key-value metadata     |
+
+### Instance-based client
+
+Use `ApiAlertsClient` directly when you need multiple clients or full
+lifecycle control.
+
+```typescript
+import { ApiAlertsClient } from 'apialerts'
+
+const client = new ApiAlertsClient('your-api-key')
+const result = await client.sendAsync({ message: 'Deploy complete' })
+if (!result.success) {
+  console.error(result.error)
+} else {
+  console.log(`Sent to ${result.workspace} (${result.channel})`)
+}
+```
+
+### Send to multiple workspaces
+
+```typescript
+const result = await ApiAlerts.sendWithKeyAsync('other-api-key', { message: 'Deploy complete' })
+if (!result.success) {
+  console.error(result.error)
+}
+```
+
+## Links
+
+- [Documentation](https://apialerts.com/docs)
+- [Sign up](https://apialerts.com)
+- [GitHub Issues](https://github.com/apialerts/apialerts-js/issues)
