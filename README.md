@@ -83,7 +83,7 @@ const result = await ApiAlerts.sendAsync(event)
 | `event` | `string` | No | Identifies what kind of thing happened. Optional but recommended. Use dotted notation (e.g. `ci.deploy.success`, `payment.failed`, `user.signup`) so routing rules can match glob patterns like `ci.*` or `*.failed`. |
 | `title` | `string` | No | Short headline some destinations render separately from the message body. |
 | `tags` | `string[]` | No | Categorisation tags for filtering and search. |
-| `link` | `string` | No | URL attached to the notification. Tapping the push notification opens this link. |
+| `link` | `string` | No | URL associated with the event. Available as a deeplink for push notifications and as a call-to-action for routed destinations. |
 | `data` | `Record<string, unknown>` | No | Arbitrary key-value metadata. Available to non-push destinations for templating (Slack message bodies, email templates, webhook payloads). |
 
 ### Send to multiple workspaces

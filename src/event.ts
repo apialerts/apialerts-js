@@ -33,8 +33,8 @@ export interface Event {
     tags?: string[]
 
     /**
-     * Optional. URL attached to the notification. Useful as a deeplink for the push notification or
-     * callout buttons in routed destinations
+     * Optional. URL associated with the event. Available as a deeplink for push notifications
+     * and as a call-to-action for routed destinations.
      */
     link?: string
 

@@ -25,7 +25,7 @@ ApiAlerts.configure(apiKey)
 if (isBuild) {
     const result = await ApiAlerts.sendAsync({
         channel: 'developer',
-        event: 'ci.build.success',
+        event: 'ci.sdk.build.js',
         title: 'Build Passed',
         message: 'JS SDK - PR build success',
         tags: ['CI/CD', 'JS', 'Build'],
@@ -40,7 +40,7 @@ if (isBuild) {
 } else if (isRelease) {
     const result = await ApiAlerts.sendAsync({
         channel: 'developer',
-        event: 'ci.release.success',
+        event: 'ci.sdk.release.js',
         title: 'Release Build Passed',
         message: 'JS SDK - Build for publish success',
         tags: ['CI/CD', 'JS', 'Build'],
@@ -55,7 +55,7 @@ if (isBuild) {
 } else if (isPublish) {
     const result = await ApiAlerts.sendAsync({
         channel: 'releases',
-        event: 'ci.publish.success',
+        event: 'ci.sdk.publish.js',
         title: 'Published',
         message: 'JS SDK - npm publish success',
         tags: ['CI/CD', 'JS', 'Deploy'],
