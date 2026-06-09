@@ -30,6 +30,7 @@ if (isBuild) {
         message: 'JS SDK - PR build success',
         tags: ['CI/CD', 'JS', 'Build'],
         link,
+        data: { integration: 'js' },
     })
     if (!result.success) {
         console.error(`Error: ${result.error}`)
@@ -45,6 +46,7 @@ if (isBuild) {
         message: 'JS SDK - Build for publish success',
         tags: ['CI/CD', 'JS', 'Build'],
         link,
+        data: { integration: 'js' },
     })
     if (!result.success) {
         console.error(`Error: ${result.error}`)
@@ -60,6 +62,7 @@ if (isBuild) {
         message: 'JS SDK - npm publish success',
         tags: ['CI/CD', 'JS', 'Deploy'],
         link,
+        data: { integration: 'js' },
     })
     if (!result.success) {
         console.error(`Error: ${result.error}`)
@@ -78,11 +81,11 @@ if (isBuild) {
     const r2 = await ApiAlerts.sendAsync({
         message: 'JS SDK - full',
         channel,
-        event: 'sdk.integration.test',
+        event: 'ci.sdk.integration.js',
         title: 'Integration Test',
         tags: ['CI/CD', 'JS'],
         link,
-        data: { version: '2.0.0' },
+        data: { integration: 'js' },
     })
     if (!r2.success) {
         console.error(`Error (full): ${r2.error}`)
